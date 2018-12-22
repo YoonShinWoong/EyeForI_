@@ -1,0 +1,51 @@
+<!--선생입장에서 유치원의 새로운 아이를 등록하는 페이지-->
+<%= render "header" %>
+<section class="new_child">
+  <div class="container">
+    <div class="new_child-part">
+      <div class="title">
+        <h2> 어린이 등록</h2>
+      </div>
+      <div class="content">
+        <!--주소창으로 보낼 수 있는 건 전부 get, 그 외 데이터를 첨부하면 post-->
+      <form action="/children/create" method="post" enctype="multipart/form-data">
+        
+        <input type="hidden" value="<%=@child_id%>">
+        
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">이름</label>
+          <input name="input_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="이름을 입력하세요">
+        </div>
+        
+        
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">나이</label>
+          <input type="number" name="input_age" min="1" max="10" class="form-control" id="exampleFormControlInput1">
+        </div>
+  
+        <div class="form-group">
+          <p>성별&nbsp&nbsp
+          <input type="radio" name="input_gender" value="boy" checked>남자
+          &nbsp&nbsp<input type="radio" name="input_gender" value="girl">여자</p>
+        </div>
+  
+        <!--<div class="form-group">-->
+        <!--  <label for="exampleFormControlTextarea1">반 이름</label>-->
+        <!--  <input name="input_className" type="text" class="form-control" id="exampleFormControlTextarea1" placeholder="반 이름을 입력하세요">-->
+        <!--</div>-->
+  
+        <!--<div class="form-group">-->
+        <!--  <label for="exampleFormControlTextarea1">반 번호</label>-->
+        <!--  <input type="number" name="input_classNumber" min="1" max="50" class="form-control" id="exampleFormControlInput1">-->
+        <!--</div>-->
+  
+        <input name="image" type="file" accept="image/*">
+        <br><br>
+  
+        <button type="submit" class="my-btn">등록</button> 
+      </form>
+      </div>
+    </div>
+  </div>
+</section>
+

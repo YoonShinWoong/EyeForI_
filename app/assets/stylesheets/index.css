@@ -1,0 +1,165 @@
+.index .name{
+    margin-top:50px;
+    margin-bottom:10px;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left:auto;
+    /*border-bottom:1px solid #c7c7c7;*/
+    border-radius: 5px;
+    /*background-color:#ffed4d;*/
+    padding:5px 10px;
+    text-align:center;
+}
+
+.index .name i{
+    margin-right: 10px;
+}
+
+.index .nametag{
+    width:10px;
+    height:10px;
+    background-color:#FFCF0A;
+}
+
+.index .name h2{
+    font-family: 'Poor Story', cursive;
+    letter-spacing: 5px;
+    margin-bottom:0;
+}
+.index .container{
+    padding:0;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.index .container .show-view{
+    max-width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.index .container .show-view .image{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+.index .container .show-view img{
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+}
+
+.index .container .show-view .table{
+    margin-bottom: 0;
+}
+
+.index .container .show-view th{
+    border:none;
+    letter-spacing: 15px;
+    width: 150px
+}
+
+.index .container .show-view td{
+    border:none;
+    opacity: 0.6;
+    width: 150px
+}
+
+.index .container .show-view .button{
+    padding-left:10px;
+    padding-right: 10px;
+    width:100%;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.index .container .show-view .button button{
+    background:transparent;
+    border: none;
+    margin:10px 0;
+}
+
+.index .container .show-view .button button a{
+    font-size:20px;
+    color:black;
+}
+
+.index .container .show-view .button button:hover{
+    cursor:pointer;
+}
+
+.index .container .show-view .bus{
+    width:100%;
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.index .container .show-view .bus button{
+    border-radius: 5px;
+    width:120px;
+    background:#ffed4d;
+    color:black;
+    border: none;
+    margin:10px 0;
+    transition:.1s;
+}
+
+.index .container .show-view .bus button p{
+    margin-bottom: 0;
+}
+
+.index .container .show-view .bus button:hover{
+    opacity: 0.6;
+    transition:.1s;
+    cursor:pointer;
+}
+
+.item_1 {
+    border:1px solid #c7c7c7;
+    border-radius: 5px;
+    padding:10px 10px;
+    margin: 15px 15px;
+    width: 300px;
+    float: left;
+}
+
+.item_2{
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    height:512px;
+    border:1px solid #c7c7c7;
+    border-radius: 5px;
+    padding:10px 10px;
+    margin: 15px 15px;
+    width: 300px;
+    float: left;
+}
+
+.item_2 a{
+    text-decoration: none;
+    height:70px;
+    width:70px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    border-radius:50%;
+    border:1px solid #c7c7c7;
+    color:#c7c7c7;
+    transition: .15s;
+}
+
+.item_2 a:hover{
+    color:white;
+    background-color:black;
+    border-color:black;
+    transition: .15s;
+}

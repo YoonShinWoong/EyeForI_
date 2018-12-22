@@ -1,0 +1,168 @@
+    .image_main{
+    width:20px;
+    height: auto;
+    } 
+    
+
+body{
+    margin:0;
+}
+
+.minseok{
+    height:100vh;
+}
+
+.minseok_img{
+    margin-top:150px;
+    width:100%;
+}
+
+.minseok .button_area{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.minseok .button_area button{
+    margin:20px 20px;
+    padding: 5px 20px;
+    border-radius: 15px;
+    border:none;
+    background: #000;
+    color:white;
+    font-size:18px;
+    transition: .15s;
+}
+
+.minseok .button_area button:hover{
+    color:black;
+    background:white;
+    border:1px solid black;
+    transition: .15s;
+}
+
+.minseok .button_area button:focus{
+    outline:none;
+}
+
+.minseok2{
+    height:100vh;
+    background: #A6A6A6;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+.minseok2 container{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.minseok2 img{
+    width:400px;
+
+}
+
+.minseok2 container h1{
+    font-weight: bold;
+    font-size:80px;
+    font-weight:12;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.minseok2 .text{
+    padding:70px;
+    color:white;
+}
+
+.minseok3{
+    height:100vh;
+    background: #FFCF0A;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+.minseok3 container{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.minseok3 img{
+    width:700px;
+    transform: translateX(30%);
+}
+
+.minseok3 container h1{
+    font-weight: bold;
+    font-size:80px;
+    font-weight:12;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.minseok3 .text{
+    padding:70px;
+    color:white;
+}
+
+.minseok4{
+    height:100vh;    
+    background:  #FFCF0A;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    
+}
+.minseok4 container{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.minseok4 img{
+    width:600px;
+    margin-right: 200px;
+    transform: translateX(-10%);
+}
+
+.minseok4 container h1{
+    font-weight: bold;
+    font-size:80px;
+    font-weight:12;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.minseok4 .text{
+    padding:70px;
+    color:white;
+}
+
+
+.minseok5{
+    height:100vh;
+    background:  #FFCF0A;
+    justify-content: center;
+    align-items: center;
+    display:flex;
+    margin-bottom: 0;
+}
+.minseok5 container{
+    justify-content: center;
+    align-items: center;
+    display:flex;
+}
+
+.minseok5 img{
+    width:500px;
+}
+
+.minseok5 container h1{
+    font-weight: bold;
+    font-size:80px;
+    font-weight:12;
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.minseok5 .text{
+    padding:70px;
+    color:white;
+}

@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sidoname: MyString
+  sigunguname: MyString
+  stcode: MyString
+  crname: 
+  crtypename: MyString
+  crstatusname: MyString
+  zipcode: MyString
+  craddr: MyString
+  crtelno: MyString
+  crfaxno: MyString
+  crhome: MyString
+  nrtrroomcnt: 1
+  nrtrroomsize: 1
+  plgrdco: 1
+  chcrtescnt: 1
+  crcapat: 1
+  crchcnt: 1
+  la: MyString
+  lo: MyString
+  crcargbname: MyString
+  crcnfmdt: MyString
+  crpausebegindt: MyString
+  crpauseenddt: MyString
+  crabldt: MyString
+  crspec: MyString
+
+two:
+  sidoname: MyString
+  sigunguname: MyString
+  stcode: MyString
+  crname: 
+  crtypename: MyString
+  crstatusname: MyString
+  zipcode: MyString
+  craddr: MyString
+  crtelno: MyString
+  crfaxno: MyString
+  crhome: MyString
+  nrtrroomcnt: 1
+  nrtrroomsize: 1
+  plgrdco: 1
+  chcrtescnt: 1
+  crcapat: 1
+  crchcnt: 1
+  la: MyString
+  lo: MyString
+  crcargbname: MyString
+  crcnfmdt: MyString
+  crpausebegindt: MyString
+  crpauseenddt: MyString
+  crabldt: MyString
+  crspec: MyString

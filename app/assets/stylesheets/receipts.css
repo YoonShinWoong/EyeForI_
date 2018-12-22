@@ -1,0 +1,76 @@
+.receipts .name{
+    margin-top:50px;
+    margin-bottom:0;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left:auto;
+    /*border-bottom:1px solid #c7c7c7;*/
+    border-radius: 5px;
+    /*background-color:#ffed4d;*/
+    padding:5px 10px;
+    /*text-align:center;*/
+}
+
+.receipts .nametag{
+    width:10px;
+    height:80px;
+    padding:10px 5px;
+    background-color:#FFCF0A;
+    margin-left:0;
+}
+.receipts .namespan{
+    font-size:28px;
+    padding-left:10px;
+}
+
+.receipts .container{
+    padding:0;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    max-width: 1000px;
+    margin-right:auto;
+    margin-left:auto;
+}
+.receipts .container table{
+    text-align:center;
+}
+.receipts .container button{
+    border:none; 
+    background:transparent;
+    padding:0;
+}
+
+.receipts .container button:hover{
+    cursor:pointer;
+}
+.modal .check_box{
+    display:flex;
+}
+.modal .check{
+    border:none;
+    background:transparent;
+    transition:.15s;
+}
+
+.modal .check:hover{
+    cursor:pointer;
+    color:green;
+    transition:.15s;
+}
+
+.modal .check_box .content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    padding-left:30px;
+}
+
+.modal .check_box th{
+    width:150px;
+}
+
+.modal .check_box td{
+    width:150px;
+}

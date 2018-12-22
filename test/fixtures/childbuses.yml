@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  child_id: 1
+  parent_id: 1
+  boarding: MyString
+  boardingtime: 2018-09-29 17:13:18
+
+two:
+  child_id: 1
+  parent_id: 1
+  boarding: MyString
+  boardingtime: 2018-09-29 17:13:18

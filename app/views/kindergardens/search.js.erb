@@ -1,0 +1,29 @@
+$(function() {
+    var selectValues = {
+        "서울특별시": {
+            "N97": "http://www.google.com",
+            "N93": "http://www..com"
+        },
+        "부산광역시": {
+            "M1": "http://www.ebay.com",
+            "M2": "http://www.twitter.com"
+        }
+    };
+    
+    var $vendor = $('select.sidoname');
+    var $model = $('select.sigunname');
+$vendor.change(function() {
+    $model.empty().append(function() {
+        var output = '';
+        $.each(selectValues[$vendor.val()], function(key, value) {
+            output += '<option>' + key + '</option>';
+        });
+        return output;
+    });
+}).change();
+    
+    // bonus: how to access the download link
+$model.change(function() {
+        $('#download-link').attr('href', selectValues[$vendor.val()][$model.val()]).show();
+    });
+});

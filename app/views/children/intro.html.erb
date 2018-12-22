@@ -1,0 +1,102 @@
+
+<!--<section class="intro">-->
+<!--    <div class="intro_title">-->
+<!--        <div class="intro_title_p">-->
+<!--            <img src="/assets/intrologo.png">-->
+<!--            <p>내 손을 떠나있는 모든 시간을 안전하게</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="intro_menu1">-->
+<!--        <div class="intro_menu1_p">-->
+<!--          <img src="/assets/robot.svg">-->
+<!--          <div class="speech_bubble">-->
+<!--             <a href="https://pf.kakao.com/_pxeDVj" target="_blank">-->
+<!--              <blockquote class="oval-quotes">-->
+<!--                <p>카카오 플러스 친구로<br> <b>챗봇</b> 이용하기</p>-->
+<!--              </blockquote>-->
+<!--             </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="intro_menu2">-->
+<!--        <div class="intro2_button">-->
+<!--            <div class="intro2_button_box one">-->
+<!--                <hr>-->
+<!--                <img src="/assets/introhouse.png">-->
+<!--                <p class="intro2_button_text">내 <b>아이</b>를 책임질<br>안전한 어린이집<br> 선택을 위한 모든 정보</p>-->
+<!--            </div>-->
+<!--            <div class="intro2_button_box two">-->
+<!--                <hr>-->
+<!--                <img src="/assets/introbus.png">-->
+<!--                <p class="intro2_button_text">내 <b>아이</b>의 안전한 <br>등하원을 위한<br> 승하차 알림 서비스</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="intro_menu3">-->
+<!--        <div class="intro_menu3_p">-->
+<!--            <div class="intro_menu3_p_text">-->
+<!--                <a href="/kindergardens/search"><img src="/assets/route.svg"><h2>시작하기</h2></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>--><!--<header>-->
+<!--    <div class="container">-->
+<!--       <div class= logo>-->
+<!--<img src="/assets/smiling-baby.png">-->
+<!--           <h1><a href="/children/intro"><img style="height:50px;" src="/assets/logo.png"></img></a></h1>-->
+<!--       </div>-->
+<!--       <div>-->
+<!--         <ul>-->
+<!--           <li><a href="/kindergardens/search">어린이집 정보</a></li>-->
+<!--            <li><a href="/children/explaination">소개</a></li>-->
+
+<!--            <#% if user_signed_in? %>-->
+<!--            <li>-->
+<!--                <div class="dropdown">-->
+<!--                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+
+<!--                      <#% if current_user.usertype == "parent" %>-->
+<!--                          <#%= current_user.username %> 학부모 님-->
+<!--                      <#% else %>-->
+<!--                          <#%= current_user.username %> 선생님-->
+<!--                      <#% end %>-->
+<!--                  </a>-->
+<!--                  <#% if user_signed_in? %>-->
+
+<!--                    <#% if current_user.usertype == "parent" %>-->
+<!--                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+
+<!-- 등록 아이가 있다면 -->
+<!--                        <#% chd = Child.find_by_parent_id(current_user.id) %>-->
+<!--                        <#% if chd != nil %>-->
+<!--                          <a class="dropdown-item" href="/children/myChildren/0">내아이 정보</a>-->
+
+<!-- 등록 아이가  없다면 -->
+<!--                        <#% else %>-->
+<!--                          <a class="dropdown-item" href="/children/search">내아이 등록</a>-->
+
+<!--                        <#% end %>-->
+
+<!--                        <a class="dropdown-item" href="/children/search">내아이 검색</a>-->
+<!--                        <a class="dropdown-item" href="/receipts/index">신청현황</a>-->
+<!--                        <#%= link_to "로그아웃", destroy_user_session_path, :class => "dropdown-item" %>-->
+<!--                      </div>-->
+
+<!--                      <#% else %>-->
+<!--                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--                        <a class="dropdown-item" href="/children/index">아이들 정보</a>-->
+<!--                        <a class="dropdown-item" href="/receipts/index">신청현황</a>-->
+<!--                        <#%= link_to "로그아웃", destroy_user_session_path, :class => "dropdown-item" %>-->
+<!--                      </div>-->
+<!--                      <#% end %>-->
+<!--                    <#% end %>  -->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <#% else %>-->
+<!--              <li><#%= link_to "로그인", new_user_session_path %></li>-->
+<!--              <li><#%= link_to "회원가입", new_user_registration_path %></li>-->
+<!--            <#% end %>-->
+<!--          </ul>-->
+<!--       </div>-->
+<!--    </div>-->
+<!--  </header>-->

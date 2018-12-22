@@ -1,0 +1,57 @@
+.children_search{
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+.children_search .part{
+    margin-top:100px;
+}
+
+.children_search .part .label{
+    font-family: 'Nanum Gothic Coding', monospace;
+    font-size:18px;
+    text-align:center;
+    width:100%;
+    border-radius:5px;
+    background-color:#ffed4d;
+}
+
+.children_search .part .input{
+    border:1px solid #c7c7c7;
+    padding-left:10px;
+    border-radius:5px;
+    width:100%;
+    margin-bottom:30px;
+}
+
+.children_search .part .submit{
+    text-align:center;
+}
+
+.children_search .part .submit button{
+    font-size:24px;
+    border:none;
+    background-color:transparent;
+    border-radius:50%;
+    transition:.15s;
+}
+
+.children_search .part .submit button:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+    transition:.15s;
+}
+.modal .yellow_title{
+    background-color:#ffed4d;
+}
+
+.modal .yellow_title h5{
+    font-family: 'Poor Story', cursive;
+    letter-spacing:5px;
+}
+.modal .check_box .image img{
+    border-radius:5px;
+}

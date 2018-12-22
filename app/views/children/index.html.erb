@@ -1,0 +1,71 @@
+<!--선생입장에서 자기유치원 소속 어린이들의 전체 목록을 보는 페이지-->
+<%= render "header" %>
+<section class="index">
+  <div class="name shadow-sm">
+    <h2>병설 어린이집</h2>
+  </div>
+  <div class="container">
+    <div class="show-view">
+      <div id="container">
+        <% @children.each do |c| %>
+        <div class="item_1">
+          <div class="image">
+            <img src="/assets/111.JPG">
+          </div>
+          <div class="content">
+            <div class="table">
+              <table>
+                <tbody>
+                  <tr>
+                    <th>이름</th>
+                    <td><%= c.name %></td>
+                  </tr>
+                  <tr>
+                    <th>나이</th>
+                    <td><%= c.age%> 세</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="button">
+              <button><a href="/children/show/<%= c.id %>"><i class="fas fa-info-circle"></i></a></button>
+              <button><i class="fas fa-user-edit"></i></button>
+              <button><i class="fas fa-user-minus"></i></button>
+            </div>
+            <div class="bus">
+              <a onclick=getin(<%=c.id%>)><button class="shadow-sm"><i class="fas fa-bus-alt"></i><p>승차</p></button></a>
+               <a onclick=getoff(<%=c.id%>)><button class="shadow-sm"><i class="fas fa-home"></i><p>하차</p></button></a>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <div class="item_2">
+          <a href="/children/new"><i class="fas fa-user-plus"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script type="text/javascript">
+function getin(id){
+    if (confirm("승차 확인하시겠습니까?") == true){    //확인
+        // document.form.submit();
+        window.location.href=("/children/getin/" + id);
+    }
+    else{   
+    }
+}
+</script>
+
+<script type="text/javascript">
+function getoff(id){
+    if (confirm("하차 확인하시겠습니까?") == true){    //확인
+        // document.form.submit();
+        window.location.href=("/children/getout/" + id);
+    }
+    else{   
+    }
+}
+</script>

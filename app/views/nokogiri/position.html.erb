@@ -1,0 +1,71 @@
+<div>
+  <button onClick="get_position()">받아오기</button>
+  <button onClick="save_position()">저장하기</button>
+</div>
+<script>
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+var x_s = [];
+var y_s = [];
+function get_position(){
+  var j = 0;
+  // console.log(x_s.length);
+  $.ajax({
+    type: "GET",
+    url: "/nokogiri/get_position",
+    dataType: "json",
+    success: function(e){
+      // alert(dangers.length);
+      for(var i=0;i<e.pub.length;i++){
+        // console.log(e.pub[i].x);
+        // console.log(e.pub[i].name);
+        var geocoder = new daum.maps.services.Geocoder();
+        // 주소로 좌표를 검색합니다
+        // console.log(e.pub[i].id);
+        geocoder.addressSearch(e.pub[i].address, function(result, status) {
+            // 정상적으로 검색이 완료됐으면
+            // console.log(e.pub[i].name);
+          if (status === daum.maps.services.Status.OK) {
+            // console.log(e.pub[i].name);
+            var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+            
+            x_s[j] = result[0].y;
+            y_s[j] = result[0].x;
+            console.log(1);
+            //console.log(j+" "+x_s[j]+" "+y_s[j]);
+            j++;
+         }
+        // sleep(500);
+        });
+      }
+    },
+    error: function(xhr, status ,error){
+      alert(error);
+    }
+  });
+}
+function save_position(){
+
+  $.ajax({
+    type: "POST",
+    url: "/nokogiri/save_position",
+    data:{
+      'x_s': x_s,
+      'y_s': y_s
+    },
+    dataType: "json",
+    success: function(e){
+        console.log("success");
+    },
+    error: function(xhr, status ,error){
+      alert(error);
+    }
+  });
+}
+</script>

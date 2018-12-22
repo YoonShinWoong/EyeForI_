@@ -1,0 +1,150 @@
+<br><h2>지도</h2>
+<div class="container">
+    <div id="map" style="width:100%;height:350px;"></div>
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b31b6d684d7a200e559b43ef5113ef6"></script>
+</div>
+
+<h2>요약 정보</h2>
+대표자명: <%=@representative%><br>
+원장명: <%= @boss %><br>
+설립유형: <%= @kinder_type %><br>
+설립일: <%= @establish_data %><br>
+관할 행정기관: <%= @organization %><br>
+전화번호: <%= @phone_num %><br>
+홈페이지 주소: <%= @homepage %><br>
+운영시간: <%= @time %><br>
+통학차량 운행 여부: <%= @bus %><br>
+평가 인증 날짜: <%= @certification_date %><br>
+
+<h2>기본 현황</h2>
+놀이터 여부: <%= @noriter %><br>
+보육실 개수: <%= @nursery_room_num %><br>
+보육실 크기: <%= @nursery_room_size %><br>
+건물 건축일:<%= @build_data %><br>
+건물 층수: <%= @floor %><br>
+cctv 개수: <%= @cctv_num %><br>
+cctv 보유 기간: <%= @cctv_reserve_time %><br>
+
+<h2>영유아 및 교직원</h2>
+정원: <%= @max_kid_num %><br>
+현원: <%= @present_kid_num %><br>
+만 0세 학급수: <%= @age_0_class_num %><br>
+만0세 학급 총원: <%= @age_0_max_kid_num %><br>
+만 0세 학급 현원: <%= @age_0_present_kid_num %><br>
+
+만 1세 학급수:
+만 세 학급 총원:
+만 1세 학급 현원:
+
+만 2세 학급수:
+만 2세 학급 총원:
+만 2세 학급 현원:
+
+만 3세 학급수:
+만 3세 학급 총원:
+만 3세 학급 현원:
+
+만 4세 학급수:
+만 4세 학급 총원:
+만 4세 학급 현원:
+
+만 5세 학급수:
+만 5세 학급 총원:
+만 5세 학급 현원:
+
+총 교사 수: <%= @total_teacher_num %><br>
+보육교사 수: <%= @nursery_teacher_num %><br>
+1급 보육교사 자격 교사 수: <%= @teach_grade_1 %><br>
+2급 보육교사 자격 교사 수: <%= @teach_grade_2 %><br>
+3급 보육교사 자격 교사 수: <%= @teach_grade_3 %><br>
+
+<script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = { 
+          center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };
+  
+  var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+  
+  function setCenter() {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new daum.maps.LatLng(33.452613, 126.570888);
+    
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+  }
+  map.addOverlayMapTypeId(daum.maps.MapTypeId.TRAFFIC);
+  
+  // 마커가 표시될 위치입니다 
+  var markerPosition  = new daum.maps.LatLng(33.450701, 126.570667); 
+  
+  // 지도를 클릭한 위치에 표출할 마커입니다
+  var cmarker = new daum.maps.Marker({ 
+      // 지도 중심좌표에 마커를 생성합니다 
+      position: markerPosition
+  }); 
+  // 지도에 마커를 표시합니다
+  cmarker.setMap(map);
+  
+  // 지도에 클릭 이벤트를 등록합니다
+  // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+  daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+      
+      // 클릭한 위도, 경도 정보를 가져옵니다 
+      var latlng = mouseEvent.latLng; 
+      
+      // 마커 위치를 클릭한 위치로 옮깁니다
+      cmarker.setPosition(latlng);
+      
+      var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
+      message += '경도는 ' + latlng.getLng() + ' 입니다';
+      
+      var resultDiv = document.getElementById('clickLatlng'); 
+      // resultDiv.innerHTML = message;
+      
+  });
+  
+  // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+  // marker.setMap(null); 
+   
+  // 마커를 표시할 위치와 title 객체 배열입니다 
+  var positions = [
+      {
+          title: '카카오', 
+          latlng: new daum.maps.LatLng(33.450705, 126.570677)
+      },
+      {
+          title: '생태연못', 
+          latlng: new daum.maps.LatLng(33.450936, 126.569477)
+      },
+      {
+          title: '텃밭', 
+          latlng: new daum.maps.LatLng(33.450879, 126.569940)
+      },
+      {
+          title: '근린공원',
+          latlng: new daum.maps.LatLng(33.451393, 126.570738)
+      }
+  ];
+  
+  // 마커 이미지의 이미지 주소입니다
+  var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+      
+  for (var i = 0; i < positions.length; i ++) {
+      
+      // 마커 이미지의 이미지 크기 입니다
+      var imageSize = new daum.maps.Size(24, 35); 
+      
+      // 마커 이미지를 생성합니다    
+      var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize); 
+      
+      // 마커를 생성합니다
+      var marker = new daum.maps.Marker({
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커를 표시할 위치
+          title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          image : markerImage // 마커 이미지 
+      });
+  }
+</script>

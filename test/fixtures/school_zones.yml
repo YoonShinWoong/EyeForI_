@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  spotname: MyString
+  x_crd: 1.5
+  y_crd: 1.5
+
+two:
+  spotname: MyString
+  x_crd: 1.5
+  y_crd: 1.5

@@ -1,0 +1,65 @@
+<%= render "header" %>
+<section class="receipts">
+  <div class="name">
+    <span class="nametag"></span><span class="namespan">신청현황</span>
+  </div>
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <!--<th scope="col" style="width:10%;"></th>-->
+          <th scope="col">소속 어린이집</th>
+          <th scope="col" >아이 이름</th>
+          <th scope="col" >보호자 이름</th>
+          <th scope="col" >처리</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <% @receipts.each do |r| %>  
+            <tr>
+              <!--<th scope="row"></th>-->
+              <!--<#%= r.id %>-->
+                <td>ㅇㅇ유치원</td>
+                <td><%= Child.find(r.child_id).name %></td>
+                <td><%= User.find(r.applicant_id).username %></td>
+                <% if current_user.usertype =="teacher" %>
+                    <td><a  onclick="accept(<%=r.id%>)"> <button type="button" class="btn btn-light"><i style="color:green; margin-right:30px;"class="fas fa-check"></i></button></a> <a  onclick="deny(<%=r.id%>)"> <button type="button" class="btn btn-light"><i style="color:#f1404b;" class="fas fa-times"></i></button></button></a></td>
+                <% else %>
+                    <td> 대기 </td>
+                <% end %>
+            </tr>
+        <% end %>
+        
+      </tbody>
+    </table>
+
+    <div class="page_position" style="text-align:center;">
+        <%= paginate @receipts%>
+    </div>
+  </div>
+</section>
+
+
+</script>
+<script type="text/javascript">
+function accept(id){
+    if (confirm("수락하시겠습니까?") == true){    //확인
+        // document.form.submit();
+        window.location.href=("/receipts/accept/" + id);
+    }
+    else{   
+    }
+}
+</script>
+
+<script type="text/javascript">
+function deny(id){
+    if (confirm("거절하시겠습니까??") == true){    //확인
+        // document.form.submit();
+        window.location.href=("/receipts/deny/" + id);
+    }
+    else{   
+    }
+}
+</script>

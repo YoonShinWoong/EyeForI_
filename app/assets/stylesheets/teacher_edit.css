@@ -1,0 +1,66 @@
+.new_child .container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.new_child .container .new_child-part{
+    padding: 30px 50px;
+}
+.new_child .container .new_child-part .title{
+    font-family: 'Poor Story', cursive;
+    background-color:#ffed4d;
+    border-radius:5px;
+    padding: 5px 50px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.new_child .container .new_child-part .title h2{
+    font-size:24px;
+    margin-bottom:0;
+}
+.new_child .container .new_child-part .content{
+    border:1px solid #c7c7c7;
+    border-radius:5px;
+    padding: 30px 50px;
+}
+
+.new_child .container .new_child-part h2{
+    margin-bottom:30px;
+}
+
+.new_child .container .new_child-part .field{
+    margin-top:10px;
+}
+
+.new_child .container .new_child-part .my-input{
+    width:100px;
+    padding-top:0;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #212121 !important;
+    border : solid 1px #c7c7c7;
+    border-radius: 5px;
+    display:inline-block;
+}
+
+.new_child .container .new_child-part .my-btn{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: black;
+    border:1px solid black;
+    border-radius: 5px;
+    transition: .15s;
+}
+
+.new_child .container .new_child-part .my-btn:hover{
+    background-color:black;
+    color:white;
+    transition: .15s;
+}

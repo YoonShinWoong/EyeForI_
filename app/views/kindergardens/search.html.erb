@@ -1,0 +1,701 @@
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<%= render "header" %>
+<section class="minseok_bg">
+  <div class="minseok_map">
+    <div class="search_map_search">
+      <div id="map" style="width:100%;height:90vh;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b31b6d684d7a200e559b43ef5113ef6"></script>
+      </div>
+    </div>
+  </div>
+  <div class="minseok_header">
+    <div class="header_bar">
+        <div class="container">
+          <div>
+            <div class="block-img">
+              <img src="/assets/blocks" width="30px;"></img>
+            </div>
+            <div class="minseok_search">
+              <!--<form name="form">-->
+              <select id="sido" name="test" onchange="changes(this.value)">
+                <% @sidoArr.each do |s| %>
+                   <option value="<%=s %>" > <%=s%> </option>
+               <% end %>
+              </select>
+              <select id="sigu" name="test2">
+                <option>전체</option>
+              </select>
+              <input id="name_input" type="text"  placeholder="어린이집 이름" name="name">
+              <button onClick="getKinder()" type="submit"><i class="fas fa-search"></i></button>
+              <!--</form>-->
+            </div>
+            
+        
+            <div class="search_outer_checkbox minseok_check">
+                <label class="search_outer_label">
+                  <input type="checkbox" >사고다발
+                  <span onClick="getAccident()" class="search_outer_label_checkmark"></span>
+                </label>
+                <label class="search_outer_label">
+                  <input type="checkbox" >유흥주점
+                  <span onClick="getPub()" class="search_outer_label_checkmark"></span>
+                </label>
+                <label class="search_outer_label">
+                  <input type="checkbox" >스쿨존
+                  <span onClick="getSchool()" class="search_outer_label_checkmark"></span>
+                </label>
+            </div>
+
+            
+          </div>
+        </div>
+    </div>
+    <div>
+      <div id="lsh_list" class="search_list" id="enters">
+        <% for i in 0..10 %>
+          <div class="search_list_card">
+            <div class="flex">
+              
+              <div class="search_list_card_text">
+                  <div class="img">
+                    <img src="/assets/baby.png" width="50px"></img>
+                  </div>
+                  
+                  <div class="text">
+                    <h2><%= @kindergarden_all[i].crname %></h2>
+                    <p><%= @kindergarden_all[i].craddr %></p> 
+                  </div>
+                  <div>
+                    <div class="button">
+                      <button onClick="gotoposi(<%=@kindergarden_all[i].id%>)"><img src="/assets/map.png" width="30px"></img></button>
+                      <a href="http://info.childcare.go.kr/info/pnis/search/preview/SummaryInfoSlPu.jsp?flag=YJ&STCODE_POP=<%=@kindergarden_all[i].stcode%>&CRNAMETITLE=<%=@kindergarden_all[i].crname %>" target="_blank"><button data-toggle="modal" data-target=".detail-info" ><img src="/assets/i.png" width="30px"></img></button></a>
+                    </div>
+                    <div class="button">
+                      <button onClick="getAccident(<%=@kindergarden_all[i].id%>)"><i class="fas fa-car-crash"></i></button>
+                      <button onClick="getPub(<%=@kindergarden_all[i].id%>)"><i class="fas fa-beer"></i></button>
+                      <button onClick="getSchool(<%=@kindergarden_all[i].id%>)"><i class="fas fa-school"></i></button>
+                    </div>
+                  </div>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  // if (self.name != 'reload') {
+  //   self.name = 'reload';
+  //   self.location.reload(true);
+  // }
+  // else self.name = ''; 
+
+  //지도 생성
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng(37.5536067, 126.96961950000002), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+    
+  var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+
+  var markers = new Array();
+  var marker_idx = -1;
+  
+// 어린이집 목록 무한 스크롤
+  var i = 0;
+  var index = 5;
+  $("#lsh_list").scroll(function () {
+    // console.log(1);
+    //console.log(" scrollTop: "+$("#lsh_list").scrollTop()+" lsh_list height: "+$("#lsh_list").height()+" window height: "+ $(window).height());
+    // console.log(" scrollTop: "+$("#lsh_list").scrollTop()+" lsh_list - window: "+($("#lsh_list").height() - $(window).height()));
+      if ($("#lsh_list").scrollTop() >= $("#lsh_list").height() - $(window).height() + 1210 + i*420) { 
+        i += 1;
+        // console.log("infi");
+        $.ajax({
+          type: "GET",
+          url: "/kindergardens/infiscroll",
+          data:{
+            'index': index
+          },
+          dataType: "json",
+          success: function(e){
+            // console.log("infi");
+            // for(i=index;i<index+3;i++){
+            for(var key in e["kind"]){
+              // console.log(e["kind"][key].crname)
+              $("#lsh_list").append("<div class=\"search_list_card\"><div class=\"search_list_card_text\"><h2>"+e["kind"][key].crname+"</h2><p>주소:"+e["kind"][key].craddr+"</p><button class=\"shadow-sm\" onClick=\"gotoposi("+e["kind"][key].id+")\"><i style=\"margin-right:10px\"class=\"fas fa-map-marker-alt\"></i>위치보기</button><button data-toggle=\"modal\" data-target=\".detail-info\" class=\"shadow-sm\"><i style=\"margin-right:10px;\"class=\"fas fa-search\"></i>상세보기</button></div></div>");
+            }
+            index += 3;
+          },
+          error: function(xhr, status ,error){
+            // alert(error);
+          }
+        });
+      } 
+  });
+  
+  //search
+  function getKinder(){
+    var sido = $('#sido').val();
+    var sigu = $('#sigu').val();
+    var crname = $('#name_input').val();
+    $.ajax({
+      type: "POST",
+      url: "/kindergardens/getKinder",
+      data:{
+        'sido': sido,
+        'sigu': sigu,
+        'crname': crname
+      },
+      dataType: "json",
+      success: function(e){
+        var list = document.getElementById("lsh_list");
+        while(list.hasChildNodes()){
+          list.removeChild(list.firstChild);  
+        }
+        for(var key in e["kind"]){
+              // console.log(e["kind"][key].crname)
+              $(".search_list").append("<div class=\"search_list_card\"><div class=\"search_list_card_text\"><h2>"+e["kind"][key].crname+"</h2><p>주소:"+e["kind"][key].craddr+"</p><button class=\"shadow-sm\" onClick=\"gotoposi("+e["kind"][key].id+")\"><i style=\"margin-right:10px\"class=\"fas fa-map-marker-alt\"></i>위치보기</button><button data-toggle=\"modal\" data-target=\".detail-info\" class=\"shadow-sm\"><i style=\"margin-right:10px;\"class=\"fas fa-search\"></i>상세보기</button></div></div>");
+            }
+      },
+      error: function(xhr, status ,error){
+        alert(error);
+      }
+    });
+  }
+  
+  //어린이집 위치로 이동
+  function gotoposi(_value){
+    $.ajax({
+      type: "GET",
+      url: "/kindergardens/gotoposi/"+_value,
+      dataType: "json",
+      success: function(e){
+        setCenter(e)
+      },
+      error: function(xhr, status ,error){
+        alert(error);
+      }
+    });
+  }
+  function setCenter(posi) {
+    var pub_imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+    var pub_imageSize = new daum.maps.Size(24, 35); 
+    var markerImage = new daum.maps.MarkerImage(pub_imageSrc, pub_imageSize);
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new daum.maps.LatLng(posi.x, posi.y);
+    
+    // 지도 중심을 이동 시킵니다
+    map.setCenter(moveLatLon);
+    var marker = new daum.maps.Marker({
+        map: map,
+        position: moveLatLon,
+        image : markerImage
+    });
+    if (marker_idx != -1){
+      markers[marker_idx].setMap(null);  
+    }
+    markers[posi.kin.id] = marker;
+    marker_idx = posi.kin.id;
+  }
+
+  var dangers = [];
+  function getPub(_id){
+    var pub_imageSrc = "/drink.png";
+    var pub_imageSize = new daum.maps.Size(24, 35); 
+    var markerImage = new daum.maps.MarkerImage(pub_imageSrc, pub_imageSize);
+    if(dangers.length == 0){
+      $.ajax({
+        type: "GET",
+        url: "/kindergardens/getPub/"+_id,
+        dataType: "json",
+        success: function(e){
+          //alert(dangers.length);
+          for(var i=0;i<e.pub.length;i++){
+            console.log(e.pub[i].adrress);
+            // console.log(e.pub[i].x + " " + e.pub[i].y);
+            // console.log(e.pub[i].name);
+            var coords = new daum.maps.LatLng(e.pub[i].x, e.pub[i].y);
+            
+            var marker = new daum.maps.Marker({
+                map: map,
+                position: coords,
+                image : markerImage
+            });
+            dangers.push(marker);
+          }
+        },
+        error: function(xhr, status ,error){
+          alert(error);
+        }
+      });
+    }
+    else{
+      for(var i=0;i<dangers.length;i++){
+        dangers[i].setMap(null);
+      }
+      dangers = [];
+    }
+  }
+  
+  var accis = [];
+  function getAccident(_id){
+    var acci_imageSrc = "/warning1.png";
+    var acci_imageSize = new daum.maps.Size(24, 35);
+    var markerImage = new daum.maps.MarkerImage(acci_imageSrc, acci_imageSize);
+    //alert(1111);
+    if(accis.length == 0){
+      $.ajax({
+        type: "GET",
+        url: "/kindergardens/getAccident/"+_id,
+        dataType: "json",
+        success: function(e){
+          //console.log(e.acci[1].y_crd);
+          //alert(1111);
+          for(var i=0;i<e.acci.length;i++){
+            var coords = new daum.maps.LatLng(e.acci[i].y_crd, e.acci[i].x_crd);
+             
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new daum.maps.Marker({
+                map: map,
+                position: coords,
+                image : markerImage
+            });
+            accis.push(marker);
+          }
+        },
+        error: function(xhr, status ,error){
+          alert(error);
+        }
+      });
+    }
+    else{
+     for(var i=0;i<accis.length;i++){
+        accis[i].setMap(null);
+      }
+      accis = [];
+    }
+  }
+  
+  var szs = [];
+  function getSchool(_id){
+    var sz_imageSrc = "/school.png";
+    var sz_imageSize = new daum.maps.Size(24, 35);
+    var markerImage = new daum.maps.MarkerImage(sz_imageSrc, sz_imageSize);
+    //alert(1111);
+    if(szs.length == 0){
+      $.ajax({
+        type: "GET",
+        url: "/kindergardens/getSchool/"+_id,
+        dataType: "json",
+        success: function(e){
+          //console.log(e.acci[1].y_crd);
+          //alert(1111);
+          for(var i=0;i<e.sz.length;i++){
+            var coords = new daum.maps.LatLng(e.sz[i].y_crd, e.sz[i].x_crd);
+             
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new daum.maps.Marker({
+                map: map,
+                position: coords,
+                image : markerImage
+            });
+            szs.push(marker);
+          }
+        },
+        error: function(xhr, status ,error){
+          alert(error);
+        }
+      });
+    }
+    else{
+     for(var i=0;i<szs.length;i++){
+        szs[i].setMap(null);
+      }
+      szs = [];
+    }
+  }
+  
+  //지도에 선 그리기
+  var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
+  var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다.
+  
+  var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
+  var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+  var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+
+  
+  // 지도에 클릭 이벤트를 등록합니다
+  // 지도를 클릭하면 선 그리기가 시작됩니다 그려진 선이 있으면 지우고 다시 그립니다
+  daum.maps.event.addListener(map, 'click', function(mouseEvent) {
+  
+      // 마우스로 클릭한 위치입니다 
+      var clickPosition = mouseEvent.latLng;
+  
+      // 지도 클릭이벤트가 발생했는데 선을 그리고있는 상태가 아니면
+      if (!drawingFlag) {
+  
+          // 상태를 true로, 선이 그리고있는 상태로 변경합니다
+          drawingFlag = true;
+          
+          // 지도 위에 선이 표시되고 있다면 지도에서 제거합니다
+          deleteClickLine();
+          
+          // 지도 위에 커스텀오버레이가 표시되고 있다면 지도에서 제거합니다
+          deleteDistnce();
+  
+          // 지도 위에 선을 그리기 위해 클릭한 지점과 해당 지점의 거리정보가 표시되고 있다면 지도에서 제거합니다
+          deleteCircleDot();
+      
+          // 클릭한 위치를 기준으로 선을 생성하고 지도위에 표시합니다
+          clickLine = new daum.maps.Polyline({
+              map: map, // 선을 표시할 지도입니다 
+              path: [clickPosition], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+              strokeWeight: 3, // 선의 두께입니다 
+              strokeColor: '#db4040', // 선의 색깔입니다
+              strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle: 'solid' // 선의 스타일입니다
+          });
+          
+          // 선이 그려지고 있을 때 마우스 움직임에 따라 선이 그려질 위치를 표시할 선을 생성합니다
+          moveLine = new daum.maps.Polyline({
+              strokeWeight: 3, // 선의 두께입니다 
+              strokeColor: '#db4040', // 선의 색깔입니다
+              strokeOpacity: 0.5, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle: 'solid' // 선의 스타일입니다    
+          });
+      
+          // 클릭한 지점에 대한 정보를 지도에 표시합니다
+          displayCircleDot(clickPosition, 0);
+  
+              
+      } else { // 선이 그려지고 있는 상태이면
+  
+          // 그려지고 있는 선의 좌표 배열을 얻어옵니다
+          var path = clickLine.getPath();
+  
+          // 좌표 배열에 클릭한 위치를 추가합니다
+          path.push(clickPosition);
+          
+          // 다시 선에 좌표 배열을 설정하여 클릭 위치까지 선을 그리도록 설정합니다
+          clickLine.setPath(path);
+  
+          var distance = Math.round(clickLine.getLength());
+          displayCircleDot(clickPosition, distance);
+      }
+  });
+      
+  // 지도에 마우스무브 이벤트를 등록합니다
+  // 선을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 선의 위치를 동적으로 보여주도록 합니다
+  daum.maps.event.addListener(map, 'mousemove', function (mouseEvent) {
+  
+      // 지도 마우스무브 이벤트가 발생했는데 선을 그리고있는 상태이면
+      if (drawingFlag){
+          
+          // 마우스 커서의 현재 위치를 얻어옵니다 
+          var mousePosition = mouseEvent.latLng; 
+  
+          // 마우스 클릭으로 그려진 선의 좌표 배열을 얻어옵니다
+          var path = clickLine.getPath();
+          
+          // 마우스 클릭으로 그려진 마지막 좌표와 마우스 커서 위치의 좌표로 선을 표시합니다
+          var movepath = [path[path.length-1], mousePosition];
+          moveLine.setPath(movepath);    
+          moveLine.setMap(map);
+          
+          var distance = Math.round(clickLine.getLength() + moveLine.getLength()), // 선의 총 거리를 계산합니다
+              content = '<div class="dotOverlay distanceInfo">총거리 <span class="number">' + distance + '</span>m</div>'; // 커스텀오버레이에 추가될 내용입니다
+          
+          // 거리정보를 지도에 표시합니다
+          showDistance(content, mousePosition);   
+      }             
+  });                 
+  
+  // 지도에 마우스 오른쪽 클릭 이벤트를 등록합니다
+  // 선을 그리고있는 상태에서 마우스 오른쪽 클릭 이벤트가 발생하면 선 그리기를 종료합니다
+  daum.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
+  
+      // 지도 오른쪽 클릭 이벤트가 발생했는데 선을 그리고있는 상태이면
+      if (drawingFlag) {
+          
+          // 마우스무브로 그려진 선은 지도에서 제거합니다
+          moveLine.setMap(null);
+          moveLine = null;  
+          
+          // 마우스 클릭으로 그린 선의 좌표 배열을 얻어옵니다
+          var path = clickLine.getPath();
+      
+          // 선을 구성하는 좌표의 개수가 2개 이상이면
+          if (path.length > 1) {
+  
+              // 마지막 클릭 지점에 대한 거리 정보 커스텀 오버레이를 지웁니다
+              if (dots[dots.length-1].distance) {
+                  dots[dots.length-1].distance.setMap(null);
+                  dots[dots.length-1].distance = null;    
+              }
+  
+              var distance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
+                  content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
+                  
+              // 그려진 선의 거리정보를 지도에 표시합니다
+              showDistance(content, path[path.length-1]);  
+               
+          } else {
+  
+              // 선을 구성하는 좌표의 개수가 1개 이하이면 
+              // 지도에 표시되고 있는 선과 정보들을 지도에서 제거합니다.
+              deleteClickLine();
+              deleteCircleDot(); 
+              deleteDistnce();
+  
+          }
+          
+          // 상태를 false로, 그리지 않고 있는 상태로 변경합니다
+          drawingFlag = false;          
+      }  
+  });    
+  
+  // 클릭으로 그려진 선을 지도에서 제거하는 함수입니다
+  function deleteClickLine() {
+      if (clickLine) {
+          clickLine.setMap(null);    
+          clickLine = null;        
+      }
+  }
+  
+  // 마우스 드래그로 그려지고 있는 선의 총거리 정보를 표시하거
+  // 마우스 오른쪽 클릭으로 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 생성하고 지도에 표시하는 함수입니다
+  function showDistance(content, position) {
+      
+      if (distanceOverlay) { // 커스텀오버레이가 생성된 상태이면
+          
+          // 커스텀 오버레이의 위치와 표시할 내용을 설정합니다
+          distanceOverlay.setPosition(position);
+          distanceOverlay.setContent(content);
+          
+      } else { // 커스텀 오버레이가 생성되지 않은 상태이면
+          
+          // 커스텀 오버레이를 생성하고 지도에 표시합니다
+          distanceOverlay = new daum.maps.CustomOverlay({
+              map: map, // 커스텀오버레이를 표시할 지도입니다
+              content: content,  // 커스텀오버레이에 표시할 내용입니다
+              position: position, // 커스텀오버레이를 표시할 위치입니다.
+              xAnchor: 0,
+              yAnchor: 0,
+              zIndex: 3  
+          });      
+      }
+  }
+  
+  // 그려지고 있는 선의 총거리 정보와 
+  // 선 그리가 종료됐을 때 선의 정보를 표시하는 커스텀 오버레이를 삭제하는 함수입니다
+  function deleteDistnce () {
+      if (distanceOverlay) {
+          distanceOverlay.setMap(null);
+          distanceOverlay = null;
+      }
+  }
+  
+  // 선이 그려지고 있는 상태일 때 지도를 클릭하면 호출하여 
+  // 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 표출하는 함수입니다
+  function displayCircleDot(position, distance) {
+  
+      // 클릭 지점을 표시할 빨간 동그라미 커스텀오버레이를 생성합니다
+      var circleOverlay = new daum.maps.CustomOverlay({
+          content: '<span class="dot"></span>',
+          position: position,
+          zIndex: 1
+      });
+  
+      // 지도에 표시합니다
+      circleOverlay.setMap(map);
+  
+      if (distance > 0) {
+          // 클릭한 지점까지의 그려진 선의 총 거리를 표시할 커스텀 오버레이를 생성합니다
+          var distanceOverlay = new daum.maps.CustomOverlay({
+              content: '<div class="dotOverlay">거리 <span class="number">' + distance + '</span>m</div>',
+              position: position,
+              yAnchor: 1,
+              zIndex: 2
+          });
+  
+          // 지도에 표시합니다
+          distanceOverlay.setMap(map);
+      }
+  
+      // 배열에 추가합니다
+      dots.push({circle:circleOverlay, distance: distanceOverlay});
+  }
+  
+  // 클릭 지점에 대한 정보 (동그라미와 클릭 지점까지의 총거리)를 지도에서 모두 제거하는 함수입니다
+  function deleteCircleDot() {
+      var i;
+  
+      for ( i = 0; i < dots.length; i++ ){
+          if (dots[i].circle) { 
+              dots[i].circle.setMap(null);
+          }
+  
+          if (dots[i].distance) {
+              dots[i].distance.setMap(null);
+          }
+      }
+  
+      dots = [];
+  }
+  
+  // 마우스 우클릭 하여 선 그리기가 종료됐을 때 호출하여 
+  // 그려진 선의 총거리 정보와 거리에 대한 도보, 자전거 시간을 계산하여
+  // HTML Content를 만들어 리턴하는 함수입니다
+  function getTimeHTML(distance) {
+  
+      // 도보의 시속은 평균 4km/h 이고 도보의 분속은 67m/min입니다
+      var walkkTime = distance / 67 | 0;
+      var walkHour = '', walkMin = '';
+  
+      // 계산한 도보 시간이 60분 보다 크면 시간으로 표시합니다
+      if (walkkTime > 60) {
+          walkHour = '<span class="number">' + Math.floor(walkkTime / 60) + '</span>시간 '
+      }
+      walkMin = '<span class="number">' + walkkTime % 60 + '</span>분'
+  
+      // 자전거의 평균 시속은 16km/h 이고 이것을 기준으로 자전거의 분속은 267m/min입니다
+      var bycicleTime = distance / 227 | 0;
+      var bycicleHour = '', bycicleMin = '';
+  
+      // 계산한 자전거 시간이 60분 보다 크면 시간으로 표출합니다
+      if (bycicleTime > 60) {
+          bycicleHour = '<span class="number">' + Math.floor(bycicleTime / 60) + '</span>시간 '
+      }
+      bycicleMin = '<span class="number">' + bycicleTime % 60 + '</span>분'
+  
+      // 거리와 도보 시간, 자전거 시간을 가지고 HTML Content를 만들어 리턴합니다
+      var content = '<ul class="dotOverlay distanceInfo">';
+      content += '    <li>';
+      content += '        <span class="label">총거리</span><span class="number">' + distance + '</span>m';
+      content += '    </li>';
+      content += '    <li>';
+      content += '        <span class="label">도보</span>' + walkHour + walkMin;
+      content += '    </li>';
+      content += '    <li>';
+      content += '        <span class="label">자전거</span>' + bycicleHour + bycicleMin;
+      content += '    </li>';
+      content += '</ul>'
+  
+      return content;
+  }
+</script>
+
+<script type="text/javascript">
+  function changes(fr) {
+    //뿌려줄값을 배열로정렬
+    // alert(fr);
+    
+    if(fr=="서울특별시") {
+    num = new Array("전체","종로구","중구","용산구","성동구","광진구","동대문구","중랑구","성북구","강북구","도봉구","노원구","은평구","서대문구","마포구","양천구","강서구","구로구","금천구","영등포구","동작구","관악구","서초구","강남구","송파구","강동구");
+    vnum = new Array("전체","종로구","중구","용산구","성동구","광진구","동대문구","중랑구","성북구","강북구","도봉구","노원구","은평구","서대문구","마포구","양천구","강서구","구로구","금천구","영등포구","동작구","관악구","서초구","강남구","송파구","강동구");
+    } 
+    else if(fr=="인천광역시") {
+      num = new Array("전체","중구","동구","미추홀구","연수구","남동구","부평구","계양구","서구","강화군","옹진군");
+      vnum = new Array("전체","중구","동구","미추홀구","연수구","남동구","부평구","계양구","서구","강화군","옹진군");
+    }
+    else if(fr=="경기도") {
+      num = new Array("전체","고양시","고양시일산동구","고양시일산서구","고양시덕양구","의정부시","남양주시","남양주시풍양출장소","파주시","구리시","포천시","양주시","동도춘시","가평군","연천군","수원시","수원시장안구","수원시권선구","수원시팔달구","수원시영통구","성남시","성남시수정구","성남시중원구","성남시분당구","안양시","안양시만안구","안양시동안구","부천시","광명시","평택시","평택시","안산시","안산시상록구","안산시단원구","과천시","오산시","시흥시","군포시","의왕시","하남시","용인시", "용인시처인구","용인시기흥구","용인시수지구","이천시","안성시","김포시","화성시","광주시","여주시","양평군");
+      vnum = new Array("전체","고양시","고양시일산동구","고양시일산서구","고양시덕양구","의정부시","남양주시","남양주시풍양출장소","파주시","구리시","포천시","양주시","동도춘시","가평군","연천군","수원시","수원시장안구","수원시권선구","수원시팔달구","수원시영통구","성남시","성남시수정구","성남시중원구","성남시분당구","안양시","안양시만안구","안양시동안구","부천시","광명시","평택시","평택시","안산시","안산시상록구","안산시단원구","과천시","오산시","시흥시","군포시","의왕시","하남시","용인시", "용인시처인구","용인시기흥구","용인시수지구","이천시","안성시","김포시","화성시","광주시","여주시","양평군");
+    }
+    else if(fr == "강원도"){
+      num = new Array("전체","춘천시","원주시","강릉시","동해시","태백시","속초시","삼척시","홍천군","횡성군","영월군","평창군","정선군","철원군","화천군","양구군","인제군","고성군","양양군");
+      vnum = new Array("전체","춘천시","원주시","강릉시","동해시","태백시","속초시","삼척시","홍천군","횡성군","영월군","평창군","정선군","철원군","화천군","양구군","인제군","고성군","양양군");
+    }
+    else if(fr == "충청남도"){
+     num = new Array("전체","공주시","보령시","아산시","서산시","논산시","계룡시","금산군","연기군","부여군","서천군","청양군","홍성군","예산군","태안군","당진시");                                                  
+     vnum = new Array("전체","공주시","보령시","아산시","서산시","논산시","계룡시","금산군","연기군","부여군","서천군","청양군","홍성군","예산군","태안군","당진시");
+    }
+    else if(fr == "충청북도"){
+      num = new Array("전체","청주시","청주시 상당구","청주시 서원구","청주시 흥덕구","청주시 청원구","충주시","제천시","청원군","보은군","옥천군","영동군","진천군","괴산군","음성군","증평군","단양군");
+      vnum = new Array("전체","청주시","청주시 상당구","청주시 서원구","청주시 흥덕구","청주시 청원구","충주시","제천시","청원군","보은군","옥천군","영동군","진천군","괴산군","음성군","증평군","단양군");
+    }
+    else if(fr == "대전광역시"){
+      num = new Array("전체","동구","중구","서구","유성구","대덕구");
+      vunm = new Array("전체","동구","중구","서구","유성구","대덕구");
+    }
+    else if(fr == "세종특별자치시"){
+      num = new Array("전체","세종특별자치시");
+      vnum = new Array("전체","세종특별자치시");
+    }
+    else if (fr == "경상북도"){
+      num = new Array("전체","포항시","경주시","김천시","안동시","구미시","영주시","영천시","상주시","문경시","경산시","군위군","의성군","청송군","영양군","영덕군","청도군","고령군","성주군","칠곡군","예천군","봉화군","울진군","울릉군");
+      vnum = new Array("전체","포항시","경주시","김천시","안동시","구미시","영주시","영천시","상주시","문경시","경산시","군위군","의성군","청송군","영양군","영덕군","청도군","고령군","성주군","칠곡군","예천군","봉화군","울진군","울릉군");
+    }
+    else if (fr == "대구광역시"){
+      num = new Array("전체","중구","동구","서구","남구","북구","수성구","달서구","달성군");
+      vnum = new Array("전체","중구","동구","서구","남구","북구","수성구","달서구","달성군");
+    }
+    else if (fr =="울산광역시"){
+      num = new Array("전체","중구","남구","동구","북구","울주군");
+      vnum = new Array("전체","중구","남구","동구","북구","울주군");
+    }
+    else if (fr =="경상남도"){
+      num = new Array("전체","창원시(구)","창원시","창원시 의창구", "창원시 성산구","창원시 마산합포구","창원시 마산회원구","창원시 진해구","마산시(구)","진주시","진해시(구)","통영시","사천시","김해시","밀양시","거제시","양산시","김해시장유출장소","의령군","함안군","창녕군","고성군","남해군","하동군","산청군","함양군","거창군","합천군");
+      vnum = new Array("전체","창원시(구)","창원시","창원시 의창구", "창원시 성산구","창원시 마산합포구","창원시 마산회원구","창원시 진해구","마산시(구)","진주시","진해시(구)","통영시","사천시","김해시","밀양시","거제시","양산시","김해시장유출장소","의령군","함안군","창녕군","고성군","남해군","하동군","산청군","함양군","거창군","합천군");
+    }
+    else if (fr == "부산광역시"){
+      num = new Array("전체","중구","서구","동구","영도구","부산진구","동래구","남구","북구","해운대구","사하구","금정구","강서구","연제구","수영구","사상구","기장군");
+      vnum = new Array("전체","중구","서구","동구","영도구","부산진구","동래구","남구","북구","해운대구","사하구","금정구","강서구","연제구","수영구","사상구","기장군");
+    }
+    else if (fr == "전라북도"){
+      num = new Array("전체","전주시","전주시완산구","전주시 덕진구","군산시","익산시","정읍시","남원시","김제시","완주군","진안군","무주군","장수군","임실군","순창군","고창군","부안군");
+      vnum = new Array("전체","전주시","전주시완산구","전주시 덕진구","군산시","익산시","정읍시","남원시","김제시","완주군","진안군","무주군","장수군","임실군","순창군","고창군","부안군");
+    }
+    else if (fr == "광주광역시"){
+      num = new Array("전체","동구","서구","남구","북구","광산구");
+      vnum = new Array("전체","동구","서구","남구","북구","광산구");
+    }
+    else if (fr == "전라남도"){
+      num = new Array("전체","목포시","여수시","순천시","나주시","광양시","담양군","곡성군","구례군","고흥군","보성군","화순군","장흥군","장흥군","강진군","해남군","영암군","무안군","함평군","영광군","장성군","완도군","진도군","신안군");
+      vnum = new Array("전체","목포시","여수시","순천시","나주시","광양시","담양군","곡성군","구례군","고흥군","보성군","화순군","장흥군","장흥군","강진군","해남군","영암군","무안군","함평군","영광군","장성군","완도군","진도군","신안군");
+    }
+    else if (fr == "제주도"){
+      num = new Array("전체","제주시","서귀포시");
+      vnum = new Array("전체","제주시","서귀포시");
+    }
+    
+  var sigun = document.getElementById("sigu");
+  // alert(sigun.length);
+  
+  //   셀렉트안의 리스트를 기본값으로 한다..
+  for(i=0; i< 100; i++) {
+    sigun.options[i] = null;
+  }
+  
+  if (fr == "제주도"){
+    for(i=0; i<100;i++){
+      sigun.options[i] = null;
+    }
+    for(i=0; i<100;i++){
+      sigun.options[i] = null;
+    }
+  }
+  //   포문을 이용하여 두번째(test2)셀렉트 박스에 값을 뿌려줍니당)
+  for(i=0;i < num.length;i++) {
+    sigun.options[i] = new Option(num[i],vnum[i]);
+  }
+}
+</script>
+
+<style>
+.dot {overflow:hidden;float:left;width:12px;height:12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
+.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+.number {font-weight:bold;color:#ee6152;}
+.dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+.distanceInfo .label {display:inline-block;width:50px;}
+.distanceInfo:after {content:none;}
+</style>

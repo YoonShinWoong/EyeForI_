@@ -1,0 +1,279 @@
+/* input box color */ input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #fff inset ; -webkit-text-fill-color: #000; } input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 5000s ease-in-out 0s; }
+.login{
+    /*background-color:#fff!important;*/
+    height:100vh;
+    background:url('bg.png') no-repeat center;
+    background-size:cover;
+    /*opacity: 0.7;*/
+}
+.login_container{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end; 
+    padding-right:130px;
+    z-index:1;
+}
+
+.login .container .login-part{
+    flex:1;
+    margin-top:5%;
+}
+
+.logoimg{
+    width:400px;
+    align-items:center;
+    justify-content:center;
+}
+
+.login .container .login-part .title h2{
+    font-size:24px;
+    margin-bottom:0;
+    align-items:center;
+    justify-content:center;
+}
+.title{
+    margin:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center; 
+    z-index:1000;
+}
+.login-part{
+    background-color:rgba(255,255,255,0.7);
+    padding:30px;
+    max-height:80vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    border-radius:15px;
+}
+.field{
+    margin-top:5px;
+    padding-top:15px;
+    line-height:2.5;
+    border-radius:5px;
+}
+.fieldwrap{
+    display:flex;
+}
+.remember_field{
+    line-height:1;
+}
+.actions{
+    display:flex;
+    align-items:center;
+    justify-content:center; 
+    margin:20px;
+    padding-top:0px;
+    
+}
+.my-input{
+    border:2px solid #FFCF0A;
+    border-radius: 5px;
+    width:250px;
+    padding:0 20px;
+}
+.my-input:focus{
+    outline:none;
+}
+.my-btn{
+    width:125px;
+    height:105px;
+    background-color: #FFCF0A;
+    border: 1px solid #FFCF0A;
+    border-radius: 5px;
+    font-size:20px;
+    
+}
+.signup-my-btn{
+    width:80px;
+    height:40px;
+    background-color: #FFCF0A;
+    border: 1px solid #FFCF0A;
+    border-radius: 5px;
+    font-size:15px;
+}
+
+.login .container .login-part .my-input{
+    padding-top:0;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #212121 !important;
+    border : solid 1px #c7c7c7;
+    border-radius: 5px;
+    display:inline-block;
+}
+
+.login .container .login-part .my-btn{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: black;
+    border:1px solid black;
+    border-radius: 5px;
+    transition: .15s;
+}
+
+.login .container .login-part .my-btn:hover{
+    background-color:black;
+    color:white;
+    transition: .15s;
+}
+
+.render{
+    padding: 5px;
+}
+.render a{
+    text-decoration:none;
+    transition: .15s;
+}
+
+.render a:hover{
+    color:black;
+    transition: .15s;
+}
+
+.signup .container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.signup .container .signup-part{
+    margin-top:30px;
+    margin-bottom:30px;
+    border-radius:5px;
+}
+
+
+.signup .container .signup-part .content{
+    border:1px solid #c7c7c7;
+    border-radius:5px;
+    padding: 30px 150px;
+}
+
+.signup .container .signup-part .title{
+    font-family: 'Poor Story', cursive;
+    background-color:#ffed4d;
+    border-radius:5px;
+    padding: 5px 50px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+.signup .container .signup-part .title h2{
+    font-size:24px;
+    margin-bottom:0;
+}
+
+.signup .container .signup-part .field{
+    margin-top:10px;
+    width:50vw;
+}
+
+.signup .container .signup-part .my-input{
+    padding-top:0;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #212121 !important;
+    border : solid 1px #c7c7c7;
+    border-radius: 5px;
+    display:inline-block;
+}
+
+.signup .container .signup-part .my-btn{
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: black;
+    border:1px solid black;
+    border-radius: 5px;
+    transition: .15s;
+}
+
+.signup .container .signup-part .my-btn:hover{
+    background-color:black;
+    color:white;
+    transition: .15s;
+}
+
+.search_school{
+    /*border:1px solid #c7c7c7;*/
+    /*border-radius:5px;*/
+    margin-top:10px;
+    border:none;
+    background:transparent;
+}
+
+.modal .check_box{
+    background:transparent;
+    border:none;
+}
+
+.modal .check_box:hover{
+    cursor:pointer;
+}
+
+.modal .up{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 10px;
+}
+
+.modal .up select{
+    background:transparent;
+    flex:3;
+}
+
+.modal .up h3{
+    padding-left:10px;
+    padding-right:10px;
+    text-align:center;
+    font-size:18px;
+    margin-bottom:0px;
+}
+
+.modal .down{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+}
+
+.modal .down h3{
+    padding-left:10px;
+    padding-right:10px;
+    text-align:center;
+    font-size:18px;
+    margin-bottom:0px;
+}
+
+.modal .down input{
+    border:solid 1px #c7c7c7;
+    border-radius:5px;
+    height:24px;
+    
+}
+
+.modal .output {
+    overflow-y: scroll; 
+    max-height: 400px;
+}
+
+.modal .output ul{
+    list-style: none;
+}
+
+.modal .output ul li{
+    border-bottom:1px solid #c7c7c7;
+}

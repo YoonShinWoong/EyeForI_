@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  age: 1
+  gender: MyString
+  teacher_id: 1
+  parent_id: 1
+  kindergarden_id: 1
+  className: MyString
+  classNumber: 1
+  thumbnail: MyString
+  bus_id: 1
+  busNumber: 1
+
+two:
+  name: MyString
+  age: 1
+  gender: MyString
+  teacher_id: 1
+  parent_id: 1
+  kindergarden_id: 1
+  className: MyString
+  classNumber: 1
+  thumbnail: MyString
+  bus_id: 1
+  busNumber: 1

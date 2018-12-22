@@ -1,0 +1,175 @@
+body{
+    margin:0;
+}
+.intro{
+    max-height:100vh;
+    overflow: hidden;
+}
+.intro .intro_title{
+    width:100%;
+    height:33%;
+    padding: 1% 3%;
+    display:flex;
+    justify-content:flex-end;
+    background-color: #fff;
+}
+.intro .intro_title .intro_title_p p{
+    margin:0;
+    padding:5px 30px 5px 0;
+    font-size:1.4rem;
+    opacity:0.8;
+    text-align: right;
+}
+.intro .intro_title img{
+    width:450px;
+}
+.intro .intro_menu1{
+    width:120%;
+    height:500px;
+    padding:10px 20px;
+    background-color: #FFCF0A;
+    transform: rotate(9.5deg) translateY(-4%) translateX(-4%);
+}
+.intro .intro_menu1 .intro_menu1_p{
+    padding-right: 100px;
+    transform: rotate(-9.5deg);
+    display:flex;
+}
+.intro .intro_menu1 .intro_menu1_p img{
+    height:150px;
+    margin:-50px 15px -50px 100px;
+}
+.intro .intro_menu1 .intro_menu1_p .speech_bubble a{
+    text-decoration:none;
+}
+.intro .intro_menu1 .intro_menu1_p .speech_bubble .oval-quotes {
+  position:relative;
+  width:280px;
+  height:130px;
+  margin:-50px 30px;
+  color:#000;
+  background:#ffed26;
+  border-radius:400px / 350px;
+}
+
+/* creates opening quotation mark */
+.intro .intro_menu1 .intro_menu1_p .speech_bubble .oval-quotes:before {
+  content:"\201C";
+  position:absolute;
+  z-index:1;
+  top:10px;
+  left:-30px;
+  font:80px/1 Georgia, serif;
+  color:#ffed26;
+}
+
+/* creates closing quotation mark */
+.oval-quotes:after {
+  content:"\201D";
+  position:absolute;
+  z-index:1;
+  bottom:-10px;
+  right:-30px;
+  font:80px/0.25 Georgia, serif;
+  color:#ffed26;
+}
+.oval-quotes p {
+  width:250px;
+  height:250px;
+  padding:30px 5px;
+  margin:0 auto;
+  text-align:center;
+  font-size:35px;
+}
+.intro .intro_menu1 .intro_menu1_p p{
+    margin:25px 10px;
+    font-size:1.4rem;
+    opacity:0.8;
+}
+.intro .intro_menu2{
+    width:120%;
+    height:700px;
+    padding:50px 30px;
+    background-color: #E8E8E8;
+    transform: rotate(-9deg) translateY(-58%) translateX(-3%);
+}
+.intro .intro_menu2 .intro2_button{
+    height:65%;
+    margin:0 13%;
+    display:flex;
+    justify-content:flex-end;
+    transform: rotate(9deg);
+}
+.intro .intro_menu2 .intro2_button .intro2_button_box{
+    width:18rem;
+    height:23rem;
+    margin-right:40px;
+    padding-top: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius:10px;
+    box-shadow: 2px 2px 5px gray;
+    font-size:23px;
+    text-align:center;
+}
+.intro .intro_menu2 .intro2_button .intro2_button_box img{
+    height:8rem;
+}
+.intro .intro_menu2 .intro2_button .intro2_button_box .intro2_button_text{
+    padding:20px 23px;
+    font-size:23px;
+    opacity: 0.7;
+    line-height:2.5rem;
+}
+.one hr{
+    margin:0;
+    border-style:solid;
+    border-width: 3px;
+    border-color:#FAE100;
+    transform:translateY(-350%);
+}
+.two hr{
+    margin:0;
+    border-style:solid;
+    border-width: 3px;
+    border-color:#AFC52F;
+    transform:translateY(-350%);
+}
+
+.intro .intro_menu3{
+    width:80%;
+    height:300px;
+    padding:10px 55px;
+    background-color: #fff;
+    transform: rotate(18deg) translateY(-200%) translateX(-30%);
+}
+.intro .intro_menu3 .intro_menu3_p{
+    margin-top:-50px;
+    padding-left: 150px;
+    display:flex;
+    justify-content:flex-end;
+    flex-direction:row-reverse;
+    transform: rotate(-18deg);
+}
+.intro .intro_menu3 .intro_menu3_p .intro_menu3_p_text h2{
+    font-size:2.3rem;
+    font-family: 'Black Han Sans', sans-serif;
+    position:relative;
+    top:-13px;
+    right:5px;
+}
+.intro .intro_menu3 .intro_menu3_p .intro_menu3_p_text a{
+    text-decoration: none;
+    color:#000;
+    opacity:0.8;
+}
+.intro .intro_menu3 .intro_menu3_p .intro_menu3_p_text img{
+    position:relative;
+    top:-110px;
+    right:-20px;
+    width:150px;
+    display:none;
+}
+.intro .intro_menu3 .intro_menu3_p .intro_menu3_p_text a:hover img{
+    display:block;
+}

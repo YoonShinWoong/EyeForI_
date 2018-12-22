@@ -1,0 +1,686 @@
+<%= render "header" %>
+<div class="modal show_modal fade detail-info" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="yellow_title_1 title">
+        <h2><i class="fas fa-fish"></i> 병설유치원</h2>
+      </div>
+      <div class="content">
+        <div class="head">
+          <div>
+            <div class="head_text shadow-sm">
+            <div class="part">
+              <table>
+                <tbody>
+                  <tr>
+                    <th>대표자명</th>
+                    <td><%=@representative%></td>
+                  </tr>
+                  <tr>
+                    <th>원장명</th>
+                    <td><%= @boss %></td>
+                  </tr>
+                  <tr>
+                    <th>설립유형</th>
+                    <td><%= @kinder_type %></td>
+                  </tr>
+                  <tr>
+                    <th>설립일</th>
+                    <td><%= @establish_data %></td>
+                  </tr>
+                  <tr>
+                    <th>관할 행정기관</th>
+                    <td><%= @organization %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="part">
+              <table>
+                <tbody>
+                  <tr>
+                    <th>전화번호</th>
+                    <td><%= @phone_num %></td>
+                  </tr>
+                  <tr>
+                    <th>운영시간</th>
+                    <td><%= @time %></td>
+                  </tr>
+                  <tr>
+                    <th>통학차량 운행 여부</th>
+                    <td><%= @bus %></td>
+                  </tr>
+                  <tr>
+                    <th>평가 인증 날짜</th>
+                    <td><%= @certification_date %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="url">
+            <a href="<%= @homepage %>"><p><%= @homepage %></p></a>
+          </div>
+          </div>
+        </div>
+        <div class="inbody">
+          <h2 style="padding-bottom:10px; margin-top:10px; display:inline-block;padding-right:50px; border-bottom:1px solid #c7c7c7;"><i class="fas fa-child"></i>기본 현황</h2>
+          <table>
+            <tbody>
+              <tr class="indody_yellow">
+                <th>놀이터 여부</th>
+                <td><%= @noriter %></td>
+              </tr>
+              <tr>
+                <th>보육실 개수</th>
+                <td><%= @nursery_room_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>보육실 크기</th>
+                <td><%= @nursery_room_size %></td>
+              </tr>
+              <tr>
+                <th>건물 건축일</th>
+                <td><%= @build_data %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>건물 층수</th>
+                <td><%= @floor %></td>
+              </tr>
+              <tr>
+                <th>cctv 개수</th>
+                <td><%= @cctv_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>보육실 cctv 개수</th>
+                <td><%= @cctv_nursery %></td>
+              </tr>
+              <tr>
+                <th>공동 놀이실 cctv 개수</th>
+                <td><%= @cctv_play_room %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>놀이터 cctv 개수</th>
+                <td><%= @cctv_noriter %></td>
+              </tr>
+              <tr>
+                <th>식당 cctv 개수</th>
+                <td><%= @cctv_cafeteria %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>강당 cctv 개수</th>
+                <td><%= @cctv_auditorium %></td>
+              </tr>
+              <tr>
+                <th>cctv 보유 기간</th>
+                <td><%= @cctv_reserve_time %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="inbody">
+          <h2 style="padding-bottom:10px; margin-top:10px; display:inline-block;padding-right:50px; border-bottom:1px solid #c7c7c7;"><i class="fas fa-child"></i>기본 현황</h2>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>어린이집 총원</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>정원</th>
+                <td><%= @max_kid_num %></td>
+              </tr>
+              <tr>
+                <th>현원</th>
+                <td><%= @present_kid_num %></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>나이별 현황</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>만 0세 학급수</th>
+                <td><%= @age_0_class_num %></td>
+              </tr>
+              <tr>
+                <th>만0세 학급 총원</th>
+                <td><%= @age_0_max_kid_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 0세 학급 현원</th>
+                <td><%= @age_0_present_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 1세 학급수</th>
+                <td><%= @age_1_class_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 세 학급 총원</th>
+                <td><%= @age_1_max_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 1세 학급 현원</th>
+                <td><%= @age_1_present_kid_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 2세 학급수</th>
+                <td><%= @age_2_class_num %></td>
+              </tr>
+              <tr>
+                <th>만 2세 학급 총원</th>
+                <td><%= @age_2_max_kid_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 2세 학급 현원</th>
+                <td><%= @age_2_present_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 3세 학급수</th>
+                <td><%= @age_3_class_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 3세 학급 총원</th>
+                <td><%= @age_3_max_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 3세 학급 현원</th>
+                <td><%= @age_3_present_kid_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 4세 학급수</th>
+                <td><%= @age_4_class_num %></td>
+              </tr>
+              <tr>
+                <th>만 4세 학급 총원</th>
+                <td><%= @age_4_max_kid_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 4세 학급 현원</th>
+                <td><%= @age_4_present_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 5세 학급수</th>
+                <td><%= @age_5_class_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>만 5세 학급 총원</th>
+                <td><%= @age_5_max_kid_num %></td>
+              </tr>
+              <tr>
+                <th>만 5세 학급 현원</th>
+                <td><%= @age_5_present_kid_num %></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>교사 현황</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>총 교사 수</th>
+                <td><%= @total_teacher_num %></td>
+              </tr>
+              <tr>
+                <th>보육교사 수</th>
+                <td><%= @nursery_teacher_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>1급 보육교사 자격 교사 수</th>
+                <td><%= @teach_grade_1 %></td>
+              </tr>
+              <tr>
+                <th>2급 보육교사 자격 교사 수</th>
+                <td><%= @teach_grade_2 %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>3급 보육교사 자격 교사 수</th>
+                <td><%= @teach_grade_3 %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+       <div class="inbody">
+        <h2 style="padding-bottom:10px; margin-top:10px; display:inline-block;padding-right:50px; border-bottom:1px solid #c7c7c7;"><i class="fas fa-child"></i>영양 및 환경위생</h2>
+        <table>
+          <tbody>
+            <tr class="indody_yellow">
+              <th>식단표</th>
+              <td><a href=<%=@menu_file%>><%=@menu_file_text%></a></td>
+            </tr>
+            <tr>
+              <th>급식 운영 방식</th>
+              <td><%= @meal_service_system %></td>
+            </tr>
+            <tr class="indody_yellow">
+              <th>식중독 발생 및 처리현황</th>
+              <td>
+                <% if @poisoning_row_size == 1 %>
+                  <%= @poisoning_td2[1] %>
+                <% else %>
+                  <% (1..@poisoning_row_size).each do |i| %>
+                    <% (1..@poisoning_col_size).each do |j| %>
+                      <%= @poisoning_td[i][j] %>
+                    <% end %>
+                    <br>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th>실내 공기질 관리 현황</th>
+              <td>
+                <% (1..@air_row_size).each do |i| %>
+                  <% (1..@air_col_size-1).each do |j| %>
+                    <%= @air_td[i][j] %>
+                  <% end %>
+                  <%= @air_td2[i] %>
+                  <br>
+                <% end %>
+              </td>
+            </tr>
+            <tr class="indody_yellow">
+              <th>정기 소독 관리 현황</th>
+              <td>
+                <% (1..@sterilize_row_size).each do |i| %>
+                  <% (1..@sterilize_col_size-1).each do |j| %>
+                    <%= @sterilize_td[i][j] %>
+                  <% end %>
+                  <%= @sterilize_td2[i] %>
+                  <br>
+                <% end %>
+              </td>
+            </tr>
+            <tr>
+              <th>음용수 종류 및 수질 검사 현황</th>
+              <td>
+                <%= @water_row_size %>
+                <%= @water_col_size %>
+                  <% (1..@water_row_size).each do |i| %>
+                    <% (1..@water_col_size).each do |j| %>
+                      <%= @water_td[i][j] %>
+                    <% end %>
+                    <%= @water_td2[i] %>
+                    <br>
+                  <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="inbody">
+          <h2 style="padding-bottom:10px; margin-top:10px; display:inline-block;padding-right:50px; border-bottom:1px solid #c7c7c7;"><i class="fas fa-child"></i>안전교육·안전점검</h2>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>최근 3년간 원장 및 보육교사의 보수교육 이수 현황</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>이수인원</th>
+                <td><%= @complete_num %></td>
+              </tr>
+              <tr>
+                <th>대상인원</th>
+                <td><%= @target_num %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>소방대피 훈련 여부</th>
+                <td><%= @firefiting_training %></td>
+              </tr>
+              <tr>
+                <th>소방대피 훈련 일자</th>
+                <td><%= @firefiting_training_date %></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>안전 점검 실시 현황</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>가스 점검 여부</th>
+                <td><%= @gas_inspection %></td>
+              </tr>
+              <tr>
+                <th>가스 점검 일자</th>
+                <td><%= @gas_inspection_date %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>소방안전 점검 여부</th>
+                <td><%= @fire_safety %></td>
+              </tr>
+              <tr>
+                <th>소방안전 점검 일자</th>
+                <td><%= @fire_safety_date %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>전기설비 점검 여부</th>
+                <td><%= @electricity_inspection %></td>
+              </tr>
+              <tr>
+                <th>전기설비 점검 일자</th>
+                <td><%= @electricity_inspection_date %></td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 style="margin-bottom:0; margin-top: 30px; margin-left:60px; opacity:.6px; font-size:18px;"><i style="margin-right: 10px" class="fas fa-caret-right"></i>놀이시설 안전검사 현황</h3>
+          <table style="margin-top:0;">
+            <tbody>
+              <tr class="indody_yellow">
+                <th>안전검사 대상 여부</th>
+                <td><%= @is_noriter_inspection %></td>
+              </tr>
+              <tr>
+                <th>안전 검사 일자</th>
+                <td><%= @noriter_inspection_date %></td>
+              </tr>
+              <tr class="indody_yellow">
+                <th>안전 검사 결과</th>
+                <td><%= @noriter_inspection_result %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!--<section class="side">-->
+<!--  <div class="container">-->
+<!--    <div class="sidebar">-->
+<!--      <ul>-->
+<!--        <li><button><a href="/children/show/1">석</a></button>-->
+<!--        <li><button><a href="/children/show/2">웅</a></button></li>-->
+<!--        <li><button><a href="/children/search"><i class="fas fa-user-plus"></i></a></button></li></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<section class="show">
+  <div class="container">
+    <div class="intro_1 shadow-sm">
+      <div class="image">
+        <!--이미지가 없으면-->
+            <% if @child.image == nil %>
+              <img src="/assets/111.JPG">
+          <!--이미지가 있으면-->
+            <% else %>
+              <%= image_tag @child.image %>
+            <% end %>
+      </div>
+      <div class="content">
+        <div class="text">
+          <div>
+            <h2 class="name"><%= @child.name %></h2>
+            <h2><%= @kin.crname %>
+              <button class="modal-btn" data-toggle="modal" data-target=".detail-info"><i class="fas fa-info-circle"></i></button>
+            </h2>
+            <table>
+              <tbody>
+                <tr>
+                  <th>나이</th>
+                  <td><%=@child.age%></td>
+                </tr>
+                <tr>
+                  <% g = @child.gender %>
+                  <th>성별</th>
+                  <td><%if g == "남" %> 남자 <% else %> 여자 <% end %></td>
+                </tr>
+                <tr>
+                  <th>담당교사</th>
+                  <td><%= User.find(@child.teacher_id).username %> 선생님</td>
+                </tr>
+                <tr>
+                  <th>학부모</th>
+                  <td><%= User.find(@child.parent_id).username %> </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bus">
+      <div class="title shadow-sm">
+        <h2>통학 버스</h2>
+      </div>
+      
+      <% if @childbus.empty? %>
+       <div class="bus_1 shadow-sm">
+          
+          <div class="noti_empty">
+            <img src="/assets/duck.png">
+              <h2> 알림 정보가 없습니다 </h2>
+          </div>
+        </div>
+      
+      <% else %>
+        <% @childbus.each do |cb| %>
+        <% child = Child.find(cb.child_id) %>
+        
+          <div class="bus_1 shadow-sm">
+            <!--<div class="edit">-->
+            <!--  <i class="fas fa-times"></i>-->
+            <!--</div>-->
+            
+            <div class="noti">
+             
+              <% if cb.boarding == "승차" %>
+                <img src="/assets/warning.png">
+                <h2><%= child.name %> 어린이가 통학 차량에 탑승했습니다</h2>
+              
+              <% else %>
+                <img src="/assets/warning.png">
+                <h2><%= child.name %> 어린이가 통학 차량에서 하차했습니다</h2>
+              
+              <% end %>
+              
+              <p>탑승시간 : <%= cb.created_at.to_s.split(" ")[0].split("-").first %> 년
+                            <%= cb.created_at.to_s.split(" ")[0].split("-")[1] %> 월
+                            <%= cb.created_at.to_s.split(" ")[0].split("-")[2] %> 일
+                            <%= cb.created_at.to_s.split(" ")[1].split(":").first %> 시
+                            <%= cb.created_at.to_s.split(" ")[1].split(":")[1] %> 분</p>
+            </div>
+          </div>
+        <% end %>
+        
+      <% end %>
+      
+    </div>
+    
+    <div class="meal">
+      <div class="title shadow-sm">
+        <h2>식중독 알리미</h2>
+      </div>
+      
+      <!--식중독 위험도 출력(관심/주의/경고/위험)-->
+      
+      <!--좋을때-->
+      <% if @result_1 == "관심" %>
+      <div class="al_1">
+        <div class="date shadow-sm">
+          <h2>오늘</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>안전</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--보통-->
+      <% if @result_1 == "주의" %>
+      <div class="al_2">
+        <div class="date shadow-sm">
+          <h2>오늘</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="yellow shadow-sm"></span>
+            <span class="yellow shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>주의</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--안좋을때-->
+      <% if @result_1 == "경고" %>
+      <div class="al_3">
+        <div class="date shadow-sm">
+          <h2>오늘</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="red shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>위험</h2>
+        </div>
+      </div>
+      <% end %>
+      
+            <!--좋을때-->
+      <% if @result_2 == "관심" %>
+      <div class="al_1">
+        <div class="date shadow-sm">
+          <h2>내일</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>안전</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--보통-->
+      <% if @result_2 == "주의" %>
+      <div class="al_2">
+        <div class="date shadow-sm">
+          <h2>내일</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="yellow shadow-sm"></span>
+            <span class="yellow shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>주의</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--안좋을때-->
+      <% if @result_2 == "경고" %>
+      <div class="al_3">
+        <div class="date shadow-sm">
+          <h2>내일</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="red shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>위험</h2>
+        </div>
+      </div>
+      <% end %>
+      
+            <!--좋을때-->
+      <% if @result_3 == "관심" %>
+      <div class="al_1">
+        <div class="date shadow-sm">
+          <h2>모레</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+            <span class="green shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>안전</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--보통-->
+      <% if @result_3 == "주의" %>
+      <div class="al_2">
+        <div class="date shadow-sm">
+          <h2>모레</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="yellow shadow-sm"></span>
+            <span class="yellow shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>주의</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      <!--안좋을때-->
+      <% if @result_3 == "경고" %>
+      <div class="al_3">
+        <div class="date shadow-sm">
+          <h2>모레</h2>
+        </div>
+        <div class="color shadow-sm">
+          <div class="col_1">
+            <span class="red shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+            <span class="none shadow-sm"></span>
+          </div>
+        </div>
+        <div class="stat shadow-sm">
+          <h2>위험</h2>
+        </div>
+      </div>
+      <% end %>
+      
+      
+      
+    </div>
+     <div class="bus">
+      <div class="title shadow-sm">
+        <h2>미세먼지 알리미</h2>
+      </div>
+      
+       <div class="bus_1 shadow-sm">
+          
+          <div class="noti_empty">
+              <h2> <%=@kin.sidoname%></h2>
+              <h2>미세먼지 : <%=@todayDust1%> </h2>
+              <h2>초미세먼지 : <%=@todayDust2%> </h2>
+          </div>
+        </div>
+      
+
+      
+    </div>
+  </div>
+ 
+</section>

@@ -1,0 +1,282 @@
+<!--<header>-->
+<!--    <div class="container">-->
+<!--       <div class= logo>-->
+           <!--<img src="/assets/smiling-baby.png">-->
+<!--           <h1><a href="/children/intro"><img style="height:50px;" src="/assets/logo.png"></img></a></h1>-->
+<!--       </div>-->
+<!--       <div>-->
+<!--         <ul>-->
+<!--           <li><a href="/kindergardens/search">어린이집 정보</a></li>-->
+<!--            <li><a href="/children/explaination">소개</a></li>-->
+            
+<!--            <#% if user_signed_in? %>-->
+<!--            <li>-->
+<!--                <div class="dropdown">-->
+<!--                  <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                    
+<!--                      <#% if current_user.usertype == "parent" %>-->
+<!--                          <#%= current_user.username %> 학부모 님-->
+<!--                      <#% else %>-->
+<!--                          <#%= current_user.username %> 선생님-->
+<!--                      <#% end %>-->
+<!--                  </a>-->
+<!--                  <#% if user_signed_in? %>-->
+                    
+<!--                    <#% if current_user.usertype == "parent" %>-->
+<!--                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+                        
+                        <!-- 등록 아이가 있다면 -->
+<!--                        <#% chd = Child.find_by_parent_id(current_user.id) %>-->
+<!--                        <#% if chd != nil %>-->
+<!--                          <a class="dropdown-item" href="/children/myChildren/0">내아이 정보</a>-->
+                        
+                        <!-- 등록 아이가  없다면 -->
+<!--                        <#% else %>-->
+<!--                          <a class="dropdown-item" href="/children/search">내아이 등록</a>-->
+                        
+<!--                        <#% end %>-->
+                        
+<!--                        <a class="dropdown-item" href="/children/search">내아이 검색</a>-->
+<!--                        <a class="dropdown-item" href="/receipts/index">신청현황</a>-->
+<!--                        <#%= link_to "로그아웃", destroy_user_session_path, :class => "dropdown-item" %>-->
+<!--                      </div>-->
+                      
+<!--                      <#% else %>-->
+<!--                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--                        <a class="dropdown-item" href="/children/index">아이들 정보</a>-->
+<!--                        <a class="dropdown-item" href="/receipts/index">신청현황</a>-->
+<!--                        <#%= link_to "로그아웃", destroy_user_session_path, :class => "dropdown-item" %>-->
+<!--                      </div>-->
+<!--                      <#% end %>-->
+<!--                    <#% end %>  -->
+<!--                </div>-->
+<!--            </li>-->
+<!--            <#% else %>-->
+<!--              <li><#%= link_to "로그인", new_user_session_path %></li>-->
+<!--              <li><#%= link_to "회원가입", new_user_registration_path %></li>-->
+<!--            <#% end %>-->
+<!--          </ul>-->
+<!--       </div>-->
+<!--    </div>-->
+<!--  </header>-->
+<style>
+.header_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1300px;
+    max-width: var(--large-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:90vw;
+    height:100vh;
+    position: absolute;
+    /*transform:rotate(-5deg);*/
+    transform: skewX(-15deg);
+    border-left:50px solid transparent;
+    animation-name: example;
+    animation-duration: 1.7s;
+    animation-fill-mode: forwards;
+    z-index:10000000;
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {background-color:rgb(0,0,0,0.8); left:1000px; top:0px;}
+    100% {background-color:rgb(0,0,0,0.8); left:600px; top:0px;}
+}
+
+ul{
+    display:none;
+    list-style:none;
+}
+.out_li{
+    font-size:55px;
+    font-weight:bold;
+    transform: skewX(15deg);
+}
+.out_li:hover{
+    background-color:#ffcf0a;
+    transform:translateX(-7%);
+    padding-left:100px;
+}
+.out_li a{
+    color:#fff;
+}
+.out_li a:hover{
+    transform: skewX(15deg);
+    color:#fff;
+    text-decoration:none;
+}
+.out_li a:active{
+    color:#ffcf0a;
+}
+.in_li{
+    font-size:25px;
+    transform: skewX(15deg);
+}
+.in_li{
+    /*transform:translateX(-7%);*/
+    padding-left:0px;
+}
+
+.in_li a:hover{
+    color:#ffcf0a;
+}
+
+ul li ul{
+    display:none;
+    position:absolute;
+    width:200px;
+}
+ul li:hover ul{
+    display:block;
+}
+ul:hover li ul li{
+    
+    transform:translateX(200%);
+}
+
+/* 헤더C: 토글 버튼 */
+
+.headC {
+    position:absolute;
+    top:10px;
+    right:100px;
+    z-index:100000000000000;
+    margin-right: 10px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 28px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+#toggle {
+  display: block;
+  width: 28px;
+  height: 30px;
+  margin: 30px auto 10px;
+}
+
+#toggle span:after,
+#toggle span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+#toggle span:after{
+  top: 9px;
+}
+#toggle span {
+  position: relative;
+  display: block;
+}
+
+#toggle span,
+#toggle span:after,
+#toggle span:before {
+  width: 100%;
+  height: 5px;
+  background-color: #888;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+
+/* on activation */
+#toggle.on span {
+  background-color: transparent;
+}
+#toggle.on span:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#toggle.on span:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+#toggle.on + #menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.headC:hover {
+    opacity: 0.3;
+}
+
+</style>
+<script src="https://use.fontawesome.com/926fe18a63.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".headC").click(function(){
+            $("#out_ul").toggleClass('active');
+        });
+    });
+</script>
+<script>
+    var theToggle = document.getElementById('toggle');
+
+    function toggleClass(elem, className) {
+    	var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, " " ) + ' ';
+        if (hasClass(elem, className)) {
+            while (newClass.indexOf(" " + className + " ") >= 0 ) {
+                newClass = newClass.replace( " " + className + " " , " " );
+            }
+            elem.className = newClass.replace(/^\s+|\s+$/g, '');
+        } else {
+            elem.className += ' ' + className;
+        }
+    }
+    
+    theToggle.onclick = function() {
+       toggleClass(this, 'on');
+       return false;
+    }
+</script>
+<header>
+    <div class="header_container">
+        <a href="/children/main" class="headA"><img src="/assets/logo.png" style="width:250px; margin-top:15px;"></img></a>
+        <button type="button" class="headC">
+            <span class="fa fa-bars" title="MENU"></span>
+        </button>
+    </div>
+    <nav>
+        <ul id="out_ul">
+            <li class="out_li"><a href="/children/main">소개</a></li>
+            <li class="out_li"><a href="/kindergardens/search">어린이집 정보</a></li>
+            
+            <% if !(user_signed_in?) %>
+              <li class="out_li"><a href="/users/sign_in">로그인</a></li>
+            
+            <!--학부모일 경우        -->
+            <% elsif current_user.usertype == "parent" %>
+                <li class="out_li"><a style="color:#fff"> <%= current_user.username %> 학부모님</a>
+                    <ul id="in_ul">
+                        <li class="in_li"><a href="/children/myChildren/0">내 아이정보</a></li>
+                        <li class="in_li"><a href="/children/search">내 아이검색</a></li>
+                        <li class="in_li"><a href="/receipts/index">신청현황</a></li>
+                        <li class="in_li"><a href="/users/sign_out">로그아웃</a></li>
+                     </ul>
+                </li>
+            
+            <!--선생님일 경우-->
+            <% else %>
+                <li class="out_li"><a style="color:#fff"> <%= current_user.username %> 선생님</a>
+                    <ul id="in_ul">
+                        <li class="in_li"><a href="/children/index">아이들 정보</a></li>
+                        <li class="in_li"><a href="/receipts/index">신청현황</a></li>
+                        <li class="in_li"><a href="/users/sign_out">로그아웃</a></li>
+                     </ul>
+                </li>
+            <% end %>
+        
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,123 @@
+.explain .explain_container{
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.explain .explain_container .explainone{
+    margin-top:50px;
+    position:relative;
+}
+.explain .explain_container .explainone h3{
+    padding-left:25px;
+}
+.explain .explain_container .explainone .line{
+    position:absolute;
+    width:100px;
+    height:5px;
+    background-color: #FFCF0A;
+}
+.explain .explain_container .explainone img{
+    width:60%;
+    transform:translateX(33%);
+}
+.explain .explain_container .explainone p{
+    margin-bottom:70px;
+    padding:15px;
+    border:1px solid gray;
+    border-radius:5px;
+    text-align:center;
+    font-size:1.3rem;
+    line-height:2rem;
+    opacity: 0.7;
+}
+.explain .explain_container .explaintwo{
+    position:relative;
+}
+.explain .explain_container .explaintwo h3{
+    padding-left:25px;
+}
+.explain .explain_container .explaintwo .line{
+    position:absolute;
+    width:100px;
+    height:5px;
+    background-color: #FFCF0A;
+}
+.explain .explain_container .explaintwo img{
+    width:85%;
+    transform:translateX(8%);
+}
+.explain .explain_container .explaintwo .explaintwo_container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 100px;
+}
+.explain .explain_container .explaintwo .explaintwo_container .explainbox{
+    margin:15px;
+}
+.explain .explain_container .explaintwo .explaintwo_container .explainbox h4{
+    padding:7px 10px;
+    background-color: #FFCF0A;
+    text-align:center;
+    border-radius:5px;
+}
+.explain .explain_container .explaintwo .explaintwo_container .explainbox p{
+    background-color: #E8E8E8;
+    border:none;
+    opacity:0.9;
+}
+.explain .explain_container .explaintwo p{
+    margin-bottom:70px;
+    padding:15px;
+    border:1px solid gray;
+    border-radius:5px;
+    text-align:center;
+    font-size:1.3rem;
+    line-height:2rem;
+    opacity: 0.7;
+}
+.explain .explain_container .explainthree{
+    position:relative;
+}
+.explain .explain_container .explainthree h3{
+    padding-left:25px;
+}
+.explain .explain_container .explainthree .line{
+    position:absolute;
+    width:100px;
+    height:5px;
+    background-color: #FFCF0A;
+}
+.explain .explain_container .explainthree img{
+    width:63%;
+    transform:translateX(30%);
+    margin-bottom:25px;
+    margin-right:15px;
+    border-radius:10px;
+   
+}
+.explain .explain_container .explainthree p{
+    margin-bottom:70px;
+    padding:15px;
+    border:1px solid gray;
+    border-radius:5px;
+    text-align:center;
+    font-size:1.3rem;
+    line-height:2rem;
+    opacity: 0.7;
+}
+.explain .explain_container .explainthree .plus_friend{
+    width:50px;
+    transform:translateX(-5%) translateY(10%);
+}
+
+.explain .explain_container .explainthree p a{
+    transition:.1s;
+    color: #c7c7c7; 
+    text-decoration:none;
+}
+
+.explain .explain_container .explainthree p a:hover{
+    transition:.1s;
+    color:black;
+}
